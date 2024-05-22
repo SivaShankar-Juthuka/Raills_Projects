@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+<h1>Tasks</h1>
+<div id="todos">
+  <% @todos.each do |todo| %>
+    <%= render todo %>
+    <p>
+      <%= link_to "Show the Task", todo %>
+    </p>
+  <% end %>
+</div>
