@@ -1,0 +1,28 @@
+<!-- app/views/tasks/index.html.erb -->
+<h1>All Tasks</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Task Name</th>
+      <th>Due Date</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th colspan="4">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+        <td><%= task.task_name %></td>
+        <td><%= task.due_date %></td>
+        <td><%= task.status.humanize %></td>
+        <td><%= task.priority.priority_level %></td>
+        <td><%= link_to 'Show', task_path(task) %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Assign', about_path %></td>
+        <td><%= button_to 'Complete', task_path(task.id),method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %> 
+  </tbody>
+</table>
+
+<%= link_to 'New Task', new_task_path %>

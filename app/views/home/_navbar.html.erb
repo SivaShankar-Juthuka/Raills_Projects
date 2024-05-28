@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg bg-dark">
+<div class="container-fluid">
+  <%= link_to 'Task Manager', root_path, class: "navbar-brand" %>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+    <ul class="navbar-nav">
+    <% if Current.user %>
+      <li class='nav-item'>
+        <%= link_to 'Create Task', new_task_path, class: 'nav-link active link-light' %>          
+      </li>
+      <li class='nav-item'>
+        <%= link_to 'Show Task', tasks_path, class: 'nav-link active' %>
+      </li>
+    <% else %>
+      <li class='nav-item'>
+        <%= link_to 'About', about_path, class: 'nav-link active' %>
+      </li>
+  <% end %>
+  
+    </ul>
+    <ul class="navbar-nav">
+      <% if Current.user %>
+        <li class="nav-item">
+            <%= link_to Current.user.email, editpassword_path, class: 'nav-link'%>
+        </li>
+        <li class="nav-item">
+          <%= button_to 'Log Out', logout_path, method: :delete, class: 'btn btn-secondary' %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to 'Sign Up', signup_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Sign In', login_path, class: "nav-link" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+</nav>

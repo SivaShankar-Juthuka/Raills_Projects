@@ -1,0 +1,35 @@
+<%= form_with(model: task, local: true) do |form| %>
+  <% if form.object.errors.any? %>
+    <div class = 'alert alert-danger'>
+        <% form.object.errors.full_messages.each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+  <% end %>   
+
+  <div class="field">
+    <%= form.label :task_name %>
+    <%= form.text_field :task_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :due_date %>
+    <%= form.date_field :due_date, min: Date.current %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, [['Pending', 'pending'], ['In Progress', 'in_progress'], ['Completed', 'completed']], prompt: 'Select Status' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :priority_id %>
+    <%= form.collection_select :priority_id, Priority.all, :id, :priority_level %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+

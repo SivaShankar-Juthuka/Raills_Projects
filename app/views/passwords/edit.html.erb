@@ -1,0 +1,22 @@
+<h1>Edit Your Password</h1>   
+<%= form_with model: Current.user, url: editpassword_path do |form| %>
+    <% if form.object.errors.any? %>
+    <div class = 'alert alert-danger'>
+        <% form.object.errors.full_messages.each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+    <% end %>
+    
+    <div class="mb-3">
+        <%= form.label :password %><br>
+        <%= form.password_field :password, class: "form-control", placeholder: 'password(atleast 6 charcters)' %>
+    </div>
+    <div class="mb-3">
+        <%= form.label :password_confirmation %><br>
+        <%= form.password_field :password_confirmation, class: "form-control", placeholder: 'password(atleast 6 charcters)' %>
+    </div>
+    <div class="mb-3">
+        <%= form.submit "Update password", class: "btn btn-warning"%>
+    </div>
+<% end %>

@@ -1,0 +1,22 @@
+<p>
+  <strong> Task Name: %></strong>
+  <%= @task.task_name %>
+</p>
+
+<p>
+  <strong>Due Date:</strong>
+  <%= @task.due_date %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @task.status.humanize %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @task.priority_id %>
+</p>
+
+<%= link_to 'Edit', edit_task_path(@task) %> | 
+<%= link_to 'Back', tasks_path %>
