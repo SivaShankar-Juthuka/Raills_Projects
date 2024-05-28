@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         if user.present? && user.authenticate(params[:password])
           session_id = SecureRandom.uuid
           session[:user_id] = session_id
-          record_session = RecordSession.new(session_params.merge(session_id: session_id, user_id: user.id, active_session: true, session_expiry: 15.seconds.from_now))
+          record_session = RecordSession.new(session_params.merge(session_id: session_id, user_id: user.id, active_session: true, session_expiry: 15.minutes.from_now))
           if record_session.save
             redirect_to root_path, notice: "Logged in successfully."
           else
