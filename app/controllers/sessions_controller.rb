@@ -10,7 +10,8 @@ class SessionsController < ApplicationController
         if user.present? && user.authenticate(params[:password])
           session_id = SecureRandom.uuid
           session[:user_id] = session_id
-          record_session = RecordSession.new(session_params.merge(session_id: session_id, user_id: user.id, active_session: true, session_expiry: 15.minutes.from_now))
+          start_scheduler_if_not_running
+          record_session = RecordSession.new(session_params.merge(session_id: session_id, user_id: user.id, active_session: true, session_expiry: 5.minutes.from_now))
           if record_session.save
             redirect_to root_path, notice: "Logged in successfully."
           else
@@ -41,5 +42,20 @@ class SessionsController < ApplicationController
 
     def session_params
         params.permit(:session_id, :user_id, :active_session, :session_expiry)
+    end
+
+
+    def start_scheduler_if_not_running
+      unless scheduler_running?
+        # Start the scheduler
+        $scheduler.every '60s' do
+          
+          RecordSession.expire_sessions
+        end
+      end
+    end
+  
+    def scheduler_running?
+      $scheduler.running_jobs.any?
     end
 end

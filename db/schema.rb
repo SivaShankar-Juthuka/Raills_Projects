@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_28_064025) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_28_180800) do
   create_table "priorities", force: :cascade do |t|
     t.string "priority_level"
     t.datetime "created_at", null: false
@@ -44,6 +44,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_064025) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role"
   end
 
   add_foreign_key "record_sessions", "users"
