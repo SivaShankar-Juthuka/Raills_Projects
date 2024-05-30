@@ -1,0 +1,14 @@
+<h1>Assign Task</h1>
+<%= form_with(model: @task, url: assign_task_path(@task), method: :post) do |form| %>
+  <div class="field">
+    <%= form.label :assigned_to_id, 'Assign To' %>
+    <%= form.select :assigned_to_id, options_for_select(@users.map { |user| [user.email, user.id] }), prompt: 'Select User' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Assign Task', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<br>
+<%= link_to 'Back', tasks_path, class: 'btn btn-secondary btn-sm' %>

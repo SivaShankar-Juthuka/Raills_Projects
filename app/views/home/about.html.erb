@@ -1,2 +1,22 @@
-<h1>About</h1>
-<p>Find me in app/views/home/about.html.erb</p>
+<h1>All Users</h1>
+
+<table class = 'table table-striped'>
+  <thead>
+    <tr>
+      <th> Id </th>
+      <th>Email</th>
+      <th>Role</th>
+      <!-- Add more columns if needed -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <!-- Add more columns if needed -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>

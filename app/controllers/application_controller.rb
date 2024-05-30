@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
     before_action :set_current_user
     before_action :check_session_timeout
-  
+      
     def set_current_user
       if session[:user_id]
         if RecordSession.where(session_id: session[:user_id], active_session: true).exists?
@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
           session[:user_id] = nil
         end
       end
+      # puts Current.user.role
     end
   
     def require_user_logged_in!
@@ -19,15 +20,14 @@ class ApplicationController < ActionController::Base
     end
   
     def check_session_timeout
-        if session[:user_id]
-          latest_session = RecordSession.find_by(session_id: session[:user_id])
-          if latest_session && Time.current > latest_session.session_expiry
-            session[:user_id] = nil
-            reset_session
-            redirect_to login_path, alert: "Your session has timed out. Please sign in again."
-          end
+      if session[:user_id]
+        latest_session = RecordSession.find_by(session_id: session[:user_id])
+        puts latest_session.session_expiry, Time.current, "++++++++++++++++++++++++"
+        if latest_session && Time.current > latest_session.session_expiry
+          session[:user_id] = nil
+          redirect_to login_path, alert: "Your session has timed out. Please sign in again."
         end
+      end
     end
-
-  end
+end
   

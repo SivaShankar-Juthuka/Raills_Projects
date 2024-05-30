@@ -20,6 +20,7 @@
         <%= form.label :password_confirmation %><br>
         <%= form.password_field :password_confirmation, class: "form-control", placeholder: 'password(atleast 6 charcters)' %>
     </div>
+    <%= form.hidden_field :role, value: "noob" %><br>
     <div class="mb-3">
         <%= form.submit "Sign Up", class: "btn btn-info "%>
     </div>

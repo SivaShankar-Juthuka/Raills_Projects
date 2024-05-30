@@ -20,5 +20,12 @@ Rails.application.routes.draw do
   # tasks
   resources :tasks
 
+  resources :tasks do
+    member do
+      get 'assign', to: 'tasks#assign'
+      post 'assign', to: 'tasks#assign'
+    end
+  end
+
   get "up" => "rails/health#show", as: :rails_health_check
 end

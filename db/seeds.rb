@@ -9,8 +9,8 @@
 #   end
 # db/seeds.rb
 
-priority_names = ['Low', 'Medium', 'High']
-
-priority_names.each do |name|
-  Priority.create(priority_level: name)
-end
+# add some users with admin roles
+User.create!(email: 'admin001@task.com', password: '123456789', password_confirmation: '123456789',role: 'admin')
+User.create!(email: 'admin002@task.com', password: '123456789', password_confirmation: '123456789',role: 'admin')
+User.create!(email: 'admin003@task.com', password: '123456789', password_confirmation: '123456789',role: 'admin')
+User.create!(email: 'admin004@task.com', password: '123456789', password_confirmation: '123456789',role: 'admin')

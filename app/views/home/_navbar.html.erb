@@ -14,6 +14,11 @@
       <li class='nav-item'>
         <%= link_to 'Show Task', tasks_path, class: 'nav-link active' %>
       </li>
+      <% if Current.user.role == 'admin' %>
+      <li class='nav-item'>
+        <%= link_to 'Users', about_path, class: 'nav-link active link-light'%>
+      </li>
+    <% end %>    
     <% else %>
       <li class='nav-item'>
         <%= link_to 'About', about_path, class: 'nav-link active' %>

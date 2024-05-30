@@ -6,4 +6,8 @@ class User < ApplicationRecord
 
     validates :email, presence: true, uniqueness: true, format: {with: VALID_EMAIL_REGEX, message: "Please enter a valid email address."}
     validates :password, presence: true, length: { minimum: 6 }
+
+    def admin?
+        role == 'admin'
+      end
 end

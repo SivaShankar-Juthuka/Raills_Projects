@@ -1,9 +1,10 @@
+<!-- app/views/tasks/_form.html.erb -->
 <%= form_with(model: task, local: true) do |form| %>
   <% if form.object.errors.any? %>
-    <div class = 'alert alert-danger'>
-        <% form.object.errors.full_messages.each do |message| %>
-            <div><%= message %></div>
-        <% end %>
+    <div class="alert alert-danger">
+      <% form.object.errors.full_messages.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
     </div>
   <% end %>   
 
@@ -23,13 +24,11 @@
   </div>
 
   <div class="field">
-    <%= form.label :priority_id %>
-    <%= form.collection_select :priority_id, Priority.all, :id, :priority_level %>
+    <%= form.label :priority_level %>
+    <%= form.select :priority_level, [['Low', 'low'], ['Medium', 'medium'], ['High', 'high']], prompt: 'Select Priority' %>
   </div>
-
 
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
-

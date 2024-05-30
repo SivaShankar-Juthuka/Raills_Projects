@@ -10,13 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_28_180800) do
-  create_table "priorities", force: :cascade do |t|
-    t.string "priority_level"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
+ActiveRecord::Schema[7.1].define(version: 2024_05_30_063510) do
   create_table "record_sessions", force: :cascade do |t|
     t.string "session_id"
     t.integer "user_id", null: false
@@ -32,10 +26,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_180800) do
     t.string "status"
     t.date "due_date"
     t.integer "user_id", null: false
-    t.integer "priority_id", null: false
+    t.string "priority_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["priority_id"], name: "index_tasks_on_priority_id"
+    t.integer "assigned_to_id"
+    t.string "assigned_by_id"
+    t.index ["priority_level"], name: "index_tasks_on_priority_level"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
@@ -44,10 +40,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_180800) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "role"
+    t.string "role", null: false
   end
 
   add_foreign_key "record_sessions", "users"
-  add_foreign_key "tasks", "priorities"
   add_foreign_key "tasks", "users"
 end
