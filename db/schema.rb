@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_30_063510) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_30_172213) do
   create_table "record_sessions", force: :cascade do |t|
     t.string "session_id"
     t.integer "user_id", null: false
@@ -29,8 +29,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_063510) do
     t.string "priority_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "assigned_to_id"
     t.string "assigned_by_id"
+    t.integer "assigned_to_id"
     t.index ["priority_level"], name: "index_tasks_on_priority_level"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
