@@ -1,10 +1,8 @@
-<h1>Assign Task</h1>
 <%= form_with(model: @task, url: assign_task_path(@task), method: :post) do |form| %>
   <div class="field">
-    <%= form.label :assigned_to_id, 'Assign To' %>
-    <%= form.select :assigned_to_id, options_for_select(@users.map { |user| [user.email, user.id] }), prompt: 'Select User' %>
+    <%= form.label :assignee_id, 'Assign To' %>
+    <%= form.collection_select :assignee_id, @available_users, :id, :email, prompt: 'Select User' %>
   </div>
-
   <div class="actions">
     <%= form.submit 'Assign Task', class: 'btn btn-primary' %>
   </div>

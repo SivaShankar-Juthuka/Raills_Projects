@@ -1,8 +1,10 @@
 module TasksHelper
     def task_editable?(task)
-        puts task.assigned_to, Current.user.id, "******************************"
-        Current.user == task.user || Current.user == task.assigned_to || Current.user.admin?
-    end
+        assigned_to_current_user = task.assignments.exists?(assigned_to: Current.user)
+        created_by_current_user = task.user == Current.user
+        Current.user.admin? || assigned_to_current_user || created_by_current_user
+      end
+      
 
     def task_destroyable?(task)
         Current.user.admin? || task.user == Current.user

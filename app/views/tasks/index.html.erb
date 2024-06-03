@@ -1,40 +1,62 @@
-<!-- app/views/tasks/index.html.erb -->
-<h1>All Tasks</h1>
-<table class="table table-striped">
+<h1>Tasks</h1>
+
+<table class='table table-striped'>
   <thead>
     <tr>
       <th>Task Name</th>
-      <th>Due Date</th>
       <th>Status</th>
       <th>Priority</th>
+      <th>Due Date</th>
       <th>Created By</th>
       <th>Assigned By</th>
       <th>Assigned To</th>
-      <th colspan="3">Actions</th>
+      <th colspan="4">Actions</th>
     </tr>
   </thead>
-
   <tbody>
     <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.task_name %></td>
-        <td><%= task.due_date %></td>
-        <td><%= task.status.humanize %></td>
-        <td><%= task.priority_level %></td>
-        <td><%= task.user.email %></td>
-        <td><%= task.assigned_by.email if task.assigned_by %></td>
-        <td><%= task.assigned_to.email if task.assigned_to %></td>
-        <td><%= link_to 'Show', task_path(task) %></td>
-        <% if task_editable?(task) %>
-          <td><%= link_to 'Edit', edit_task_path(task) %></td>
+      <% if task.assignments.any? %>
+        <% task.assignments.each do |assignment| %>
+          <tr>
+            <td><%= task.task_name %></td>
+            <td><%= task.status.humanize %></td>
+            <td><%= task.priority_level %></td>
+            <td><%= task.due_date %></td>
+            <td><%= task.user.email %></td>
+            <td><%= assignment.assigned_by.email %></td>
+            <td><%= assignment.assigned_to.email %></td>
+            <td><%= link_to 'Show', task_path(task) %></td>
+            <% if task_editable?(task) %>
+              <td><%= link_to 'Edit', edit_task_path(task) %></td>
+            <% end %>
+            <% if task_destroyable?(task) %>
+              <td><%= button_to 'Complete', task_path(task.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+            <% if Current.user.admin? %>
+              <td><%= link_to 'Assign', assign_task_path(task) %></td>
+            <% end %>
+          </tr>
         <% end %>
-        <% if task_destroyable?(task) %>
-          <td><%= button_to 'Complete', task_path(task.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-        <% if Current.user.admin? %>
-          <td><%= link_to 'Assign', assign_task_path(task) %></td>
-        <% end %>
-      </tr>
+      <% else %>
+        <tr>
+          <td><%= task.task_name %></td>
+          <td><%= task.status.humanize %></td>
+          <td><%= task.priority_level %></td>
+          <td><%= task.due_date %></td>
+          <td><%= task.user.email %></td>
+          <td colspan="2">No assignments found for this task.</td>
+          <td><%= link_to 'Show', task_path(task) %></td>
+          <% if task_editable?(task) %>
+            <td><%= link_to 'Edit', edit_task_path(task) %></td>
+          <% end %>
+          <% if task_destroyable?(task) %>
+            <td><%= button_to 'Complete', task_path(task.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+          <% if Current.user.admin? %>
+            <td><%= link_to 'Assign', assign_task_path(task) %></td>
+          <% end %>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

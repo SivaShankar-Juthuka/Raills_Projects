@@ -1,22 +1,26 @@
-<p>
-  <strong> Task Name: %></strong>
-  <%= @task.task_name %>
-</p>
+<h1>Task Details</h1>
 
-<p>
-  <strong>Due Date:</strong>
-  <%= @task.due_date %>
-</p>
+<p><strong>Task Name:</strong> <%= @task.task_name %></p>
+<p><strong>Status:</strong> <%= @task.status %></p>
+<p><strong>Due Date:</strong> <%= @task.due_date %></p>
+<p><strong>Priority Level:</strong> <%= @task.priority_level %></p>
+<p><strong>Created By:</strong> <%= @task.user.email %></p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @task.status.humanize %>
-</p>
+<% if @task.user_tasks.any? %>
+  <h2>Assignments:</h2>
+  <ul>
+    <% @task.user_tasks.each do |user_task| %>
+      <li>
+        <p><strong>Assigned To:</strong> <%= user_task.user.email %></p>
+        <p><strong>Status:</strong> <%= user_task.status %></p>
+        <p><strong>Priority Level:</strong> <%= user_task.priority_level %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No assignments found for this task.</p>
+<% end %>
 
-<p>
-  <strong>Priority:</strong>
-  <%= @task.priority_level %>
-</p>
-
-<%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>
+
+
