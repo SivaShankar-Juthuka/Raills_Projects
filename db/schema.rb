@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_172213) do
     t.integer "user_id", null: false
     t.string "priority_level"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "updated_at", null: false      
     t.string "assigned_by_id"
     t.integer "assigned_to_id"
     t.index ["priority_level"], name: "index_tasks_on_priority_level"
