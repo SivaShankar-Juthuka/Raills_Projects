@@ -46,6 +46,7 @@ gem "bootsnap", require: false
 
 gem 'grape'
 gem 'grape-entity'
+gem 'grape_on_rails_routes'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

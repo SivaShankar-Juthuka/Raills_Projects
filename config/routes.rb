@@ -1,11 +1,8 @@
 # config/routes.rb
 Rails.application.routes.draw do
   # Mount Grape API at /api
-  mount BaseAPI::API => '/'
+  mount Api => '/'
 
-  root "tasks#index"
-  # Other routes
-  resources :tasks
   get "up" => "rails/health#show", as: :rails_health_check
 end
 
