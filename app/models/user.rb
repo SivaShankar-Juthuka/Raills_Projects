@@ -5,7 +5,7 @@ class User < ApplicationRecord
     has_many :assigned_tasks, class_name: 'UserTask', foreign_key: 'assigned_to_id'
     has_many :assigned_by_tasks, class_name: 'UserTask', foreign_key: 'assigned_by_id'
   
-    before_validation :set_default_user, on: :create
+    before_validation :set_default_user
     
     VALID_EMAIL_REGEX = /\A[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\z/
 

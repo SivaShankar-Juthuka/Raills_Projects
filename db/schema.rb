@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_07_102959) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_10_181920) do
   create_table "blacklisted_tokens", force: :cascade do |t|
     t.string "token"
     t.datetime "created_at", null: false
@@ -30,9 +30,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_07_102959) do
   create_table "user_tasks", force: :cascade do |t|
     t.integer "assigned_to"
     t.integer "assigned_by"
-    t.string "task_name"
     t.string "status"
-    t.datetime "due_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "task_id"
