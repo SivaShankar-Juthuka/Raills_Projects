@@ -23,4 +23,8 @@ class User < ApplicationRecord
             self.role = 'user'
         end
     end
+
+    def self.ransackable_attributes(auth_object = nil)
+        %w[id email role] # Add more attributes if needed
+    end
 end

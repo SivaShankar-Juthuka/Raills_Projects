@@ -7,11 +7,13 @@ class Api::V1::Tasks < Grape::API
 
         desc 'Return list of tasks'
         params do
+            optional :q, type: Hash, desc: 'Search and filtering parameters'
             optional :page, type: Integer, desc: 'Page number', default: 1
             optional :per_page, type: Integer, desc: 'Number of items per page', default: 10
         end
         get do
-            tasks = paginate(Task.all)  # Use the helper method to paginate
+            tasks = Task.ransack(params[:q]).result
+            tasks = paginate(tasks)
             present tasks
         end
     

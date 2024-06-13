@@ -76,12 +76,14 @@ end
     
     desc 'All users'
     params do
+      optional :q, type: Hash, desc: 'Search and filtering parameters'
       optional :page, type: Integer, desc: 'Page number', default: 1
       optional :per_page, type: Integer, desc: 'Number of items per page', default: 10
     end 
     get do
       if Current.user.admin?
-        user = paginate(User.all)
+        users = User.ransack(params[:q]).result
+        user = paginate(users)
         present user
       else
         error!('Unauthorized access role must be admin', 401)

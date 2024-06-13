@@ -6,11 +6,13 @@ class Api::V1::UserTasks < Grape::API
     resource :user_tasks do
       desc 'Return list of user tasks'
       params do
+        optional :q, type: Hash, desc: 'Search and filtering parameters'
         optional :page, type: Integer, desc: 'Page number', default: 1
         optional :per_page, type: Integer, desc: 'Number of items per page', default: 5
       end
       get do
-        user_tasks = paginate(UserTask.all)
+        user_tasks = UserTask.ransack(params[:q]).result
+        user_tasks = paginate(user_tasks)
         present user_tasks
       end
 

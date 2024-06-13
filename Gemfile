@@ -31,6 +31,7 @@ gem "grape-entity"
 gem "grape_on_rails_routes"
 gem "jwt"
 gem "will_paginate"
+gem "ransack"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
