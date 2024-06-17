@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_10_181920) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_16_052321) do
   create_table "blacklisted_tokens", force: :cascade do |t|
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sub_tasks", force: :cascade do |t|
+    t.integer "task_id", null: false
+    t.string "sub_task_name"
+    t.string "status"
+    t.datetime "due_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "created_user_id"
+    t.index ["task_id"], name: "index_sub_tasks_on_task_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -45,6 +56,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_10_181920) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "sub_tasks", "tasks"
   add_foreign_key "tasks", "users"
   add_foreign_key "user_tasks", "tasks"
 end
